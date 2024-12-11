@@ -1,24 +1,13 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-
-import org.junit.Before;
-import org.junit.Test;
-
-import static org.junit.Assert.*;
-import org.junit.Before;
-import org.junit.Test;
 
 public class LibraryManagementTest {
     private Book validBookLow;
     private Book validBookHigh;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         // Initialize valid books
         try {
@@ -45,22 +34,14 @@ public class LibraryManagementTest {
 
     @Test
     public void testBookId_InvalidLessThan100() {
-        try {
-            new Book(99, "Invalid Book");
-            fail("Exception was not thrown for ID less than 100.");
-        } catch (Exception e) {
-            assertEquals("Invalid book ID: 99. ID must be between 100 and 999.", e.getMessage());
-        }
+        Exception exception = assertThrows(Exception.class, () -> new Book(99, "Invalid Book"));
+        assertEquals("Invalid book ID: 99. ID must be between 100 and 999.", exception.getMessage());
     }
 
     @Test
     public void testBookId_InvalidGreaterThan999() {
-        try {
-            new Book(1000, "Invalid Book");
-            fail("Exception was not thrown for ID greater than 999.");
-        } catch (Exception e) {
-            assertEquals("Invalid book ID: 1000. ID must be between 100 and 999.", e.getMessage());
-        }
+        Exception exception = assertThrows(Exception.class, () -> new Book(1000, "Invalid Book"));
+        assertEquals("Invalid book ID: 1000. ID must be between 100 and 999.", exception.getMessage());
     }
 
     @Test
@@ -76,11 +57,8 @@ public class LibraryManagementTest {
 
     @Test
     public void testBookId_InvalidIDMessage() {
-        try {
-            new Book(50, "Another Invalid Book");
-            fail("Exception was not thrown for invalid ID.");
-        } catch (Exception e) {
-            assertTrue(e.getMessage().contains("Invalid book ID"));
-        }
+        Exception exception = assertThrows(Exception.class, () -> new Book(50, "Another Invalid Book"));
+        assertTrue(exception.getMessage().contains("Invalid book ID"));
     }
 }
+
