@@ -38,4 +38,9 @@ public class Book {
     public boolean isValidId(int id) {
         return id >= 100 && id <= 999;
     }
+
+	public void setAvailable(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
 }
